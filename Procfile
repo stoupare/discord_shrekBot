@@ -1,1 +1,1 @@
-worker: discordrandobot.py
+worker: python discordrandobot.py
