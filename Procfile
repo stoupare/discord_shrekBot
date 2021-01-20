@@ -1,0 +1,1 @@
+worker: discordrandobot.py
