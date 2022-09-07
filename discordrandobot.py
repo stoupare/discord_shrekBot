@@ -129,5 +129,5 @@ async def grouproll(interaction: discord.Interaction):
     await resp.add_reaction("🎲")
             
 insults = init_insults()
-client.run('ODAxMTc4NTM5OTc3OTk4Mzg3.YAc5qQ.jLs7vRG6YKBQF_orE8ISPqMA_bY')
+client.run(os.getenv('TOKEN'))
 
