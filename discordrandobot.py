@@ -46,17 +46,6 @@ async def randFunc(startNum, endNum):
     print(text)
     return text
 
-async def rollFunc(message):
-    args = message.content[len(roll_prefix):].strip()
-    parts = args.split(' ')
-    print(args, parts)
-    text = "Rolling: \n"
-    if args:
-        text += "> " + args
-    roll_message = await message.channel.send(text)
-    await roll_message.add_reaction("🎲")
-    await message.channel.send("**Use This Roll ID**:\n > " + str(roll_message.id))
-
 async def rollEndFunc(message):
     users = [ user async for user in message.reactions[0].users()]
 
@@ -81,10 +70,10 @@ async def rollFunc(message):
     print(parts)
     total = 0
     for i in range(int(parts[0])):
-        result = random.randint(0, int(parts[1]))
+        result = random.randint(1, int(parts[1]))
         message += str(result)
         total += result
-        if (i + 1 != parts[0]):
+        if (i + 1 != int(parts[0])):
             message +=","
 
     if (int(parts[0]) > 1):
@@ -127,7 +116,7 @@ async def grouproll(interaction: discord.Interaction):
     await interaction.response.send_message("Here's your rolls", view = ButtonView())
     resp = await interaction.original_response()
     await resp.add_reaction("🎲")
-            
+    
 insults = init_insults()
 client.run(os.getenv('TOKEN'))
 
