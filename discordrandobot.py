@@ -132,5 +132,5 @@ async def grouproll(interaction: discord.Interaction):
             
 insults = init_insults()
 flirts = init_flirt()
-client.run('ODAxMTc4NTM5OTc3OTk4Mzg3.GB6ibw.RMk7LLDzA4hgKnRW7t_F5XrPlv2ptEmChXslp0')
+client.run(os.getenv('TOKEN'))
 
