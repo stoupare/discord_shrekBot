@@ -41,6 +41,13 @@ def init_insults():
         insults.append(l)
     return insults
 
+def init_flirt():
+    pickup = []
+    f = open("pickuplines.txt", "r+")
+    for l in f:
+        pickup.append(l)
+    return pickup
+
 async def randFunc(startNum, endNum):
     text = random.randint(startNum, endNum)
     print(text)
@@ -91,6 +98,12 @@ async def vm(interaction: discord.Interaction):
     insult = insults[random.randint(0, len(insults))]
     await interaction.response.send_message(f'{insult}')
 
+@client.tree.command()
+async def flirt(interaction: discord.Interaction):
+    """Provides a flirticious thing to say"""
+    pickup_line = flirts[random.randint(0, len(flirts))]
+    await interaction.response.send_message(f'{pickup_line}')
+
 
 @client.tree.command(name="random")
 @app_commands.describe(
@@ -116,7 +129,8 @@ async def grouproll(interaction: discord.Interaction):
     await interaction.response.send_message("Here's your rolls", view = ButtonView())
     resp = await interaction.original_response()
     await resp.add_reaction("🎲")
-    
+            
 insults = init_insults()
-client.run(os.getenv('TOKEN'))
+flirts = init_flirt()
+client.run('ODAxMTc4NTM5OTc3OTk4Mzg3.GB6ibw.RMk7LLDzA4hgKnRW7t_F5XrPlv2ptEmChXslp0')
 
