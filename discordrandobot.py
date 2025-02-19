@@ -2,11 +2,13 @@ import discord
 from discord import app_commands
 import random
 import os
+from google import genai
 
 intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
+gen_ai_client = genai.Client(api_key=os.getenv("GEMINI_API"))
 tree = app_commands.CommandTree(client)
 
 
@@ -129,6 +131,17 @@ async def grouproll(interaction: discord.Interaction):
     await interaction.response.send_message("Here's your rolls", view = ButtonView())
     resp = await interaction.original_response()
     await resp.add_reaction("🎲")
+
+
+@client.tree.command()
+@app_commands.describe(
+    question="Ask AI something interesting"
+)
+async def ask_ai(interaction: discord.Interaction, question: str='Flirt with me like you are shrek'):
+    """asks ai a chat, no context"""
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=question)
+    print(response.text)
+    await interaction.response.send_message(response.text)
             
 insults = init_insults()
 flirts = init_flirt()
