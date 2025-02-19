@@ -133,7 +133,7 @@ async def grouproll(interaction: discord.Interaction):
     await resp.add_reaction("🎲")
 
 
-@client.tree.command()
+@client.tree.command(name="ask_ai")
 @app_commands.describe(
     question="Ask AI something interesting"
 )
