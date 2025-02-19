@@ -137,9 +137,10 @@ async def grouproll(interaction: discord.Interaction):
 @app_commands.describe(
     question="Ask AI something interesting"
 )
-async def ask_ai(interaction: discord.Interaction, question: str='Flirt with me like you are shrek'):
+async def ask_ai(interaction: discord.Interaction, question: str='give me a recipe'):
     """asks ai a chat, no context"""
-    response = gen_ai_client.models.generate_content(model="gemini-2.0-flash", contents=question)
+    content = f'Reply to the following as if you are shrek:\n{question}'
+    response = gen_ai_client.models.generate_content(model="gemini-2.0-flash", contents=content)
     print(response.text)
     await interaction.response.send_message(response.text)
             
