@@ -139,7 +139,7 @@ async def grouproll(interaction: discord.Interaction):
 )
 async def talk(interaction: discord.Interaction, question: str='give me a recipe'):
     """asks ai a chat, no context"""
-    content = f'Reply to the following as if you are shrek:\n{question}'
+    content = f'Reply to the following as if you are shrek:\n{question}. Keep the response to under 2000 characters'
     response = gen_ai_client.models.generate_content(model="gemini-2.0-flash", contents=content)
     print(response.text)
     await interaction.response.send_message(response.text)
