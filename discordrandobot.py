@@ -135,7 +135,7 @@ async def grouproll(interaction: discord.Interaction):
 
 @client.tree.command(name="talk")
 @app_commands.describe(
-    question="Ask AI something interesting"
+    question="Ask shrek bot something interesting"
 )
 async def talk(interaction: discord.Interaction, question: str='give me a recipe'):
     """asks ai a chat, no context"""
@@ -144,6 +144,28 @@ async def talk(interaction: discord.Interaction, question: str='give me a recipe
     print(response.text)
     await interaction.response.send_message(response.text)
             
+@client.tree.command(name="impersonate")
+@app_commands.describe(
+    question="Ask AI something interesting as somebody else"
+)
+async def impersonate(interaction: discord.Interaction, question: str='give me a recipe', character: str="A poor tiefling boy"):
+    """talk to ai while its impersonating someone. no context"""
+    content = f'You are an actor. Your task is to reply as if you are some character\nRoleplay as:{character}:\n{question}.\n Keep the response to under 2000 characters'
+    response = gen_ai_client.models.generate_content(model="gemini-2.0-flash", contents=content)
+    print(response.text)
+    await interaction.response.send_message(response.text)
+
+@client.tree.command(name="ask_ai")
+@app_commands.describe(
+    question="Ask AI something interesting"
+)    
+async def ask_ai(interaction: discord.Interaction, prompt: str='give me a recipe'):
+    """asks ai a chat, no context"""
+    content = f'{prompt}. Keep the response to under 2000 characters'
+    response = gen_ai_client.models.generate_content(model="gemini-2.0-flash", contents=content)
+    print(response.text)
+    await interaction.response.send_message(response.text)
+
 insults = init_insults()
 flirts = init_flirt()
 client.run(os.getenv('TOKEN'))
