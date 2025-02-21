@@ -146,7 +146,8 @@ async def talk(interaction: discord.Interaction, question: str='give me a recipe
             
 @client.tree.command(name="impersonate")
 @app_commands.describe(
-    question="Ask AI something interesting as somebody else"
+    question="Ask AI something interesting as somebody else",
+    character="Who should it impersonate"
 )
 async def impersonate(interaction: discord.Interaction, question: str='give me a recipe', character: str="A poor tiefling boy"):
     """talk to ai while its impersonating someone. no context"""
@@ -157,7 +158,7 @@ async def impersonate(interaction: discord.Interaction, question: str='give me a
 
 @client.tree.command(name="ask_ai")
 @app_commands.describe(
-    question="Ask AI something interesting"
+    prompt="Provide a message to send"
 )    
 async def ask_ai(interaction: discord.Interaction, prompt: str='give me a recipe'):
     """asks ai a chat, no context"""
